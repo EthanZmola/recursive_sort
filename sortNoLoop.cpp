@@ -2,29 +2,36 @@
 
 using namespace std;
 
+//Recursive check if array is sorted
 bool testOrder(int sorted[], int iter, int size)
-{
+{   
+    //Reaches end of array and all in order so return true.
     if (iter == size-1)
     {
         return true;
     }
 
+    //If first element is greater than second element is not ordered yet.
     if (sorted[iter] > sorted[iter+1])
     {
         return false;
     }
 
+    //Recursive portion
     return testOrder(sorted, iter+1, size);
 }
 
-
+//Recursive sort of integer array of any size.
 void sortRec(int sorting[], int iteration, int size)
 {
     int temp = 0;
+
+    //May want to switch to modulo with divison to do a more proper bubble sort. Think this is O(n^3) currently.
     if (iteration == size-1)
     {
         iteration = 0;
     }
+    //Reordering elements.
     if (sorting[iteration] > sorting[iteration +1])
     {
         int temp = sorting[iteration +1];
@@ -53,6 +60,7 @@ int main()
     sortRec(sortArray, 0, 10);
 
 
+    //Print to check if array sorted.
     for (int i =0; i <10; i++)
     {
         cout << sortArray[i] << " ";
