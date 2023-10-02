@@ -25,49 +25,57 @@ bool testOrder(int sorted[], int iter, int size)
 //Recursive sort of integer array of any size.
 void sortRec(int sorting[], int iteration, int size, int compare)
 {
+
+
+    cout << "it:" <<iteration << " "<< ((size*(size-1))/2)<< " ";
     int temp = 0;
 
+    cout << "f";
     int topFact = tgamma(size);
-    int botFact = tgamma(size-compare-1);
+    int botFact = tgamma(size-compare);
     int combined = topFact/botFact;
+    cout << "in" << " ";
+    cout << topFact << " " << botFact << " " << combined << " " << iteration/combined << " ";
 
-    if (iteration/topFact == 1)
+    if ((iteration)/combined == 1)
     {
         compare++;
     }
 
 
+//cpompare (+ iter% size- compare?)
+
     //Reordering elements.
-    if (sorting[compare] > sorting[iteration +1])
+    if (sorting[compare] > sorting[compare + (iteration%(size -compare))])
     {
-        int temp = sorting[iteration +1];
-        sorting[iteration +1] = sorting[compare];
+        int temp = sorting[compare + (iteration%(size -compare))];
+        sorting[compare + (iteration%(size -compare))] = sorting[compare];
         sorting[compare] = temp;
+    }
+
+    //end case
+    if (iteration == (((size*(size-1))/2))-1)
+    {
+        return;
     }
 
     iteration++;
 
-    //End case
-    //sorting[0] < sorting[1] && sorting[1] < sorting[2] && sorting[2] < sorting[3] && sorting[3] < sorting[4]
-    if (testOrder(sorting, 0, size))
-    {
-        return;
-    }
-    else{
-        sortRec(sorting, iteration, size, compare);
-    }
+
+    sortRec(sorting, iteration, size, compare);
 }
 
 
 int main() 
 {
-    int sortArray[10] = {5,3,2,1,4,6,43,56,2,-56};
+    int sortArray[3] = {5,3,2};
 
-    sortRec(sortArray, 0, 10, 0);
+    sortRec(sortArray, 0, 3, 0);
 
+    cout << endl << "Check" << endl;
 
     //Print to check if array sorted.
-    for (int i =0; i <10; i++)
+    for (int i =0; i <3; i++)
     {
         cout << sortArray[i] << " ";
     }
