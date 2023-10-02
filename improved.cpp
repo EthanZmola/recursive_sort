@@ -27,7 +27,7 @@ void sortRec(int sorting[], int iteration, int size, int compare)
 {
 
 
-    cout << "it:" <<iteration << " "<< ((size*(size-1))/2)<< " ";
+    //cout << "it:" <<iteration << " "<< ((size*(size-1))/2)<< " ";
     int temp = 0;
 
     cout << "f";
@@ -35,7 +35,7 @@ void sortRec(int sorting[], int iteration, int size, int compare)
     int botFact = tgamma(size-compare);
     int combined = topFact/botFact;
     cout << "in" << " ";
-    cout << topFact << " " << botFact << " " << combined << " " << iteration/combined << " ";
+    //cout << topFact << " " << botFact << " " << combined << " " << iteration/combined << " ";
 
     if ((iteration)/combined == 1)
     {
@@ -45,11 +45,16 @@ void sortRec(int sorting[], int iteration, int size, int compare)
 
 //cpompare (+ iter% size- compare?)
 
+    cout << "Compare val 1:" <<sorting[compare] << " Compare val 2:" <<sorting[compare + 1+(iteration%(size-compare-1))] << " ";
+
+    //int compareVal = 
     //Reordering elements.
-    if (sorting[compare] > sorting[compare + (iteration%(size -compare))])
+    if (sorting[compare] > sorting[compare + (iteration%(size-compare))])
     {
-        int temp = sorting[compare + (iteration%(size -compare))];
-        sorting[compare + (iteration%(size -compare))] = sorting[compare];
+        int temp = sorting[compare + (iteration%(size -compare-1))];
+        sorting[compare + (iteration%(size -compare))] = 0;
+        sorting[compare + (iteration%(size -compare-1))] = sorting[compare];
+        sorting[compare] = 0;
         sorting[compare] = temp;
     }
 
